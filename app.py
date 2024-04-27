@@ -9,11 +9,11 @@ app = Flask(__name__)
 cleaned_answers = []
 cleaned_answers_f = []
 # Azure necessary things
-azure_endpoint = "https://sampleprac.cognitiveservices.azure.com/language/query-knowledgebases/projects/samplepracprac/sources?api-version=2023-04-01"
-url = "https://sampleprac.cognitiveservices.azure.com/language/authoring/query-knowledgebases/projects/samplepracprac/qnas?api-version=2023-04-01"
+azure_endpoint = ""
+url = ""
 headers = {
     "Content-type": "application/json",
-    "Ocp-apim-subscription-key": "b5ed995c3bec44058f1f38c8db081331"
+    "Ocp-apim-subscription-key": ""
 }
 
 generated_qna = []
@@ -22,20 +22,15 @@ question = ""
 answer = ""
 # qa generation
 
-# t5_weights_path = '/Users/gopalkrishnan/Documents/t5-small-Race-QA-Generation-version0-step90000.pt'
-t5_weights_path = '/Users/gopalkrishnan/Documents/t5-base-Race-QA-Generation-version0-step30000.pt'
+t5_weights_path = 't5-base-Race-QA-Generation-version0-step30000.pt'
 t5_tokenizer = AutoTokenizer.from_pretrained("t5-base")
 t5_model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 t5_tokenizer.add_special_tokens({"sep_token": "<sep>"})
 t5_model.load_state_dict(torch.load(t5_weights_path, map_location=torch.device('cpu')))
-# t5_weights_path = '/Users/gopalkrishnan/Documents/t5-base'
-# t5_config_path = '/Users/gopalkrishnan/Documents/t5-base/config.json'
-# t5_model = T5ForConditionalGeneration.from_pretrained(t5_weights_path, config=t5_config_path)
-# t5_tokenizer = AutoTokenizer.from_pretrained(t5_weights_path)
-# t5_tokenizer.add_special_tokens({"sep_token": "<sep>"})
+
 # distractor generation
-distractor_weights_path = '/Users/gopalkrishnan/Documents/distractor'
-distractor_config_path = '/Users/gopalkrishnan/Documents/distractor/config.json'
+distractor_weights_path = 'distractor'
+distractor_config_path = 'distractor/config.json'
 distractor_model = AutoModelForSeq2SeqLM.from_pretrained(distractor_weights_path, config=distractor_config_path)
 distractor_tokenizer = AutoTokenizer.from_pretrained(distractor_weights_path)
 distractor_tokenizer.add_special_tokens({"sep_token": "<sep>"})
