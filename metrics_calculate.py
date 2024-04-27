@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 from nltk.translate.bleu_score import corpus_bleu, SmoothingFunction
 
-t5_weights_path = '/Users/gopalkrishnan/Documents/t5-base-Race-QA-Generation-version0-step30000.pt'
+t5_weights_path = ''
 t5_tokenizer = AutoTokenizer.from_pretrained("t5-base")
 t5_model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 t5_tokenizer.add_special_tokens({"sep_token": "<sep>"})
@@ -17,8 +17,7 @@ from bert_score import score as bert_score
 from rouge_score import rouge_scorer
 
 # Load SQuAD dataset
-# squad = load_dataset("squad")
-triviaqa = load_dataset('trivia_qa', 'rc')
+squad = load_dataset("squad")
 
 
 # Load T5 model and tokenizer
